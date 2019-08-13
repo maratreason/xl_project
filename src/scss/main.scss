@@ -1,0 +1,51 @@
+@import "~font-awesome/scss/font-awesome";
+@import "~reset-css/sass/reset";
+
+/* Default styles */
+
+.panel {
+  background-color: #e2e2e2;
+  padding: 15px;
+
+  input {
+    border: none;
+    padding: 10px;
+    border-radius: 2px;
+    outline: none;
+  }
+
+  button {
+    border: none;
+    outline: none;
+    padding: 10px;
+    background-color: green;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 2px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100px;
+  }
+}
+
+.table {
+  margin: 2rem;
+
+  thead {
+    > * > td {
+      border: 1px solid #ccc;
+      padding: .5rem 1.5rem;
+      background-color: #ccc;
+      border-right-color: #fff;
+
+      &:last-child {
+        border-right-color: #ccc;
+      }
+    }
+  }
+
+  * > td {
+    border: 1px solid #ccc;
+    padding: 1rem 1.5rem;
+  }
+}

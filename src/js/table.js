@@ -21,7 +21,6 @@ window.onload = function(e) {
       }
       tbody.appendChild(tr);
     }
-    
   }
 
   button.addEventListener('click', createTable);

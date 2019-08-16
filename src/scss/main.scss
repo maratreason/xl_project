@@ -30,6 +30,7 @@
 
 .table {
   margin: 2rem;
+  resize: both; overflow: auto;
 
   thead {
     > * > td {
@@ -47,5 +48,15 @@
   * > td {
     border: 1px solid #ccc;
     padding: 1rem 1.5rem;
+    min-width: 50px;
+    resize: both; 
+    overflow: auto;
   }
+}
+
+#test {
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+  margin: 20px auto;
 }

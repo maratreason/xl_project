@@ -63,7 +63,4 @@ window.onload = function(e) {
   // button.addEventListener('click', createTable);
   createTable();
   resize();
-
 }
-
-  

@@ -3,60 +3,75 @@
 
 /* Default styles */
 
-.panel {
-  background-color: #e2e2e2;
-  padding: 15px;
-
-  input {
-    border: none;
-    padding: 10px;
-    border-radius: 2px;
-    outline: none;
-  }
-
-  button {
-    border: none;
-    outline: none;
-    padding: 10px;
-    background-color: green;
-    color: #fff;
-    font-size: 14px;
-    border-radius: 2px;
-    font-weight: bold;
-    cursor: pointer;
-    width: 100px;
-  }
+* {
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .table {
   margin: 2rem;
-  resize: both; overflow: auto;
+  // resize: both; 
+  overflow: auto;
+  border: 1px solid #999;
+  display: flex;
 
-  thead {
-    > * > td {
-      border: 1px solid #ccc;
-      padding: .5rem 1.5rem;
-      background-color: #ccc;
-      border-right-color: #fff;
+  &-title {
+    background-color: #e2e2e2;
+    text-transform: uppercase;
+    display: flex;
 
-      &:last-child {
-        border-right-color: #ccc;
-      }
+    &__item {
+      text-align: center;
+      width: 50px;
+      height: 20px;
+      padding: 5px 10px;
+      border: 1px solid #e7e7e7;
     }
   }
 
-  * > td {
-    border: 1px solid #ccc;
-    padding: 1rem 1.5rem;
-    min-width: 50px;
-    resize: both; 
-    overflow: auto;
+  &-content {
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+
+    &__item {
+      text-align: center;
+      min-width: 50px;
+      max-width: 100%;
+      min-height: 20px;
+      padding: 5px 10px;
+      border: 1px solid #e7e7e7;
+      border-top: none;
+    }
+
+    &__item-header {
+      text-align: center;
+      min-width: 50px;
+      max-width: 100%;
+      min-height: 20px;
+      padding: 5px 10px;
+      border: 1px solid #e7e7e7;
+      border-top: none;
+      background-color: #e2e2e2;
+    }
   }
 }
 
-#test {
-  width: 200px;
-  height: 200px;
-  border: 1px solid black;
-  margin: 20px auto;
+
+#block {
+  min-height: 100px;
+  min-width: 100px;
+  position: relative;
+  width: 100px;
+  border: 1px solid #999;
+}
+#block_resize {
+  background-color: transparent;
+  bottom: 0;
+  cursor: all-scroll;
+  height: 100%;
+  width: 100%;
+  margin-top: 9px;
+  position: absolute;
+  right: 0;
 }

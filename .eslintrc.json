@@ -6,8 +6,9 @@
     "extends": ["eslint:recommended", "google"],
     "parser": "babel-eslint",
     "globals": {
-        "window": true
-        
+        "window": true,
+        "require": true,
+        "module": true,
     },
     "rules": {
         "linebreak-style": 0,

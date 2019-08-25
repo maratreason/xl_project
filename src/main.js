@@ -1,2 +1,3 @@
 import "./scss/main.scss";
-import "./js/main.js";
+import "./js/table.js";
+// import "./js/main.js";

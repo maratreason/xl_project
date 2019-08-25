@@ -1,6 +1,4 @@
 const div = document.querySelector('.table');
-const table = document.createElement('table');
-const tableBody = document.createElement('tbody');
 
 /**
  * This function created a new table.
@@ -8,26 +6,63 @@ const tableBody = document.createElement('tbody');
  * @param {Number} columnInp columns.
  */
 function createTable(cellInp, columnInp) {
-  const tbodyTr = document.createElement('tr');
-  tableBody.classList.add('.table-body');
-  tbodyTr.classList.add('.table-body__tr');
 
-  tableBody.appendChild(tbodyTr);
-  table.appendChild(tableBody);
-  div.appendChild(table);
+  let innerCell;
+  let column;
+  let resizer = document.createElement('div');
 
-  tbodyTr.innerHTML = '';
+  for (let row = 0; row < cellInp; row++) {
+    column = document.createElement('div');
+    column.classList.add('column');
 
-  for (let row = 0; row < columnInp; row++) {
-    const tr = document.createElement('tr');
-    for (let cell = 0; cell < cellInp; cell++) {
-      const td = document.createElement('td');
-      td.textContent = 'Some';
-      td.classList.add('.newTd');
-      tr.appendChild(td);
+    div.appendChild(column);
+    for (let col = 0; col < columnInp; col++) {
+      innerCell = document.createElement('div');
+      resizer = document.createElement('div');
+      resizer.classList.add('resizer');
+      innerCell.addEventListener('mousedown', initResize, false);
+      innerCell.classList.add('cell');
+      innerCell.appendChild(resizer);
+      column.appendChild(innerCell);
     }
-    tbodyTr.appendChild(tr);
+    div.appendChild(column);
   }
 }
 
-createTable(20, 15);
+createTable(5, 5);
+
+
+let element = document.querySelectorAll('.cell');
+let resizer = document.createElement('div');
+
+resizer.className = 'resizer';
+resizer.style.width = '20px';
+resizer.style.height = '20px';
+resizer.style.background = 'red';
+resizer.style.position = 'absolute';
+resizer.style.right = 0;
+resizer.style.bottom = 0;
+resizer.style.cursor = 'se-resize';
+
+element.forEach(elem => {
+  elem.appendChild(resizer);
+});
+
+// resizer.addEventListener('mousedown', initResize, false);
+
+function initResize(e) {
+  window.addEventListener('mousemove', resize, false);
+  window.addEventListener('mouseup', stopResize, false);
+}
+
+function resize(e) {
+  element.forEach(elem => {
+    elem.style.width = (e.clientX - elem.offsetLeft) + 'px';
+    elem.style.height = (e.clientY - elem.offsetTop) + 'px';
+  });
+}
+
+function stopResize(e) {
+  window.removeEventListener('mousemove', resize, false);
+  window.removeEventListener('mouseup', stopResize, false);
+}

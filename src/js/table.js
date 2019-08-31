@@ -1,68 +1,51 @@
 const div = document.querySelector('.table');
 
-/**
- * This function created a new table.
- * @param {Number} cellInp cells.
- * @param {Number} columnInp columns.
- */
 function createTable(cellInp, columnInp) {
 
   let innerCell;
   let column;
-  let resizer = document.createElement('div');
+  columnInp++;
+  let headerABC = createABC();
 
-  for (let row = 0; row < cellInp; row++) {
+  for (let row = 0; row <= cellInp; row++) {
     column = document.createElement('div');
     column.classList.add('column');
-
+    innerCell = document.createElement('div');
+    innerCell.classList.add('cell');
+    column.appendChild(innerCell);
     div.appendChild(column);
+
     for (let col = 0; col < columnInp; col++) {
-      innerCell = document.createElement('div');
-      resizer = document.createElement('div');
-      resizer.classList.add('resizer');
-      innerCell.addEventListener('mousedown', initResize, false);
-      innerCell.classList.add('cell');
-      innerCell.appendChild(resizer);
-      column.appendChild(innerCell);
+
+      if (col === 0) {
+        innerCell.classList.add('cell-head');
+        innerCell.textContent = headerABC[row-1];
+      }
+
+      if (row === 0 && col >= 1) {
+        innerCell.textContent = col;
+        innerCell.classList.add('cell-head');
+        innerCell.classList.add('cell-head-number');
+        column.style.width = '40px';
+      }
+
+      if (col != columnInp - 1) {
+        innerCell = document.createElement('div');
+        innerCell.classList.add('cell');
+        column.appendChild(innerCell);
+      }
     }
-    div.appendChild(column);
   }
+  
 }
 
-createTable(5, 5);
+function createABC() {
+  let arr = [];
+  for (let i = 65; i <= 90; i++) {
+    arr.push(String.fromCodePoint(i));
+  }
 
-
-let element = document.querySelectorAll('.cell');
-let resizer = document.createElement('div');
-
-resizer.className = 'resizer';
-resizer.style.width = '20px';
-resizer.style.height = '20px';
-resizer.style.background = 'red';
-resizer.style.position = 'absolute';
-resizer.style.right = 0;
-resizer.style.bottom = 0;
-resizer.style.cursor = 'se-resize';
-
-element.forEach(elem => {
-  elem.appendChild(resizer);
-});
-
-// resizer.addEventListener('mousedown', initResize, false);
-
-function initResize(e) {
-  window.addEventListener('mousemove', resize, false);
-  window.addEventListener('mouseup', stopResize, false);
+  return arr;
 }
 
-function resize(e) {
-  element.forEach(elem => {
-    elem.style.width = (e.clientX - elem.offsetLeft) + 'px';
-    elem.style.height = (e.clientY - elem.offsetTop) + 'px';
-  });
-}
-
-function stopResize(e) {
-  window.removeEventListener('mousemove', resize, false);
-  window.removeEventListener('mouseup', stopResize, false);
-}
+createTable(15, 15);

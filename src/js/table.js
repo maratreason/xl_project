@@ -19,7 +19,10 @@ function createTable(cellInp, columnInp) {
 
       if (col === 0) {
         innerCell.classList.add('cell-head');
-        innerCell.textContent = headerABC[row-1];
+        innerCell.innerHTML = `
+          ${headerABC[row-1] || ''}
+          <div class="resize-col" data-resize="col"></div>
+        `
       }
 
       if (row === 0 && col >= 1) {
@@ -29,18 +32,18 @@ function createTable(cellInp, columnInp) {
         column.style.width = '40px';
       }
 
-      if (col != columnInp - 1) {
+      if (col !== columnInp - 1) {
         innerCell = document.createElement('div');
         innerCell.classList.add('cell');
         column.appendChild(innerCell);
       }
     }
   }
-  
+
 }
 
 function createABC() {
-  let arr = [];
+  const arr = [];
   for (let i = 65; i <= 90; i++) {
     arr.push(String.fromCodePoint(i));
   }

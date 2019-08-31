@@ -19,6 +19,22 @@
 
     .cell-head {
       background-color: #e7e7e7;
+
+      .resize-col {
+        position: absolute;
+        width: 4px;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        opacity: 0;
+        background: blue;
+
+        &:hover {
+          background: blue;
+          opacity: 1;
+          cursor: col-resize;
+        }
+      }
     }
 
     .cell-head-number {

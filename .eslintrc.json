@@ -1,0 +1,18 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "extends": ["eslint:recommended", "google"],
+    "parser": "babel-eslint",
+    "globals": {
+        "window": true,
+        "require": true,
+        "module": true,
+    },
+    "rules": {
+        "linebreak-style": 0,
+        "semi": ["error", "always"],
+        "quotes": ["error", "single"]
+    }
+}

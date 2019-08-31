@@ -1,66 +1,51 @@
+const div = document.querySelector('.table');
 
-window.onload = function(e) {
-  // const button = document.querySelector('.panel-btn');
-  const div = document.querySelector('.table');
-  let cellInput = 5;
-  let columnInput = 5;
-  let table = document.createElement('table');
-  let tableBody = document.createElement('tbody');
+function createTable(cellInp, columnInp) {
 
-  function createTable(cellInp = 1, columnInp = 1) {
-    
-    const tbodyTr = document.createElement('tr');
-    // const cellInput = document.querySelector('.panel-add__cell').value;
-    // const columnInput = document.querySelector('.panel-add__column').value;
+  let innerCell;
+  let column;
+  columnInp++;
+  let headerABC = createABC();
 
-    tableBody.classList.add('.table-body');
-    tbodyTr.classList.add('.table-body__tr');
+  for (let row = 0; row <= cellInp; row++) {
+    column = document.createElement('div');
+    column.classList.add('column');
+    innerCell = document.createElement('div');
+    innerCell.classList.add('cell');
+    column.appendChild(innerCell);
+    div.appendChild(column);
 
-    tableBody.appendChild(tbodyTr);
-    table.appendChild(tableBody);
-    div.appendChild(table);
+    for (let col = 0; col < columnInp; col++) {
 
-    tbodyTr.innerHTML = '';
-    
-    for (let row = 0; row < columnInp; row++) {
-      let tr = document.createElement('tr');
-      for (let cell = 0; cell < cellInp; cell++) {
-        let td = document.createElement('td');
-        td.textContent = 'Some';
-        td.classList.add('.newTd');
-        tr.appendChild(td);
+      if (col === 0) {
+        innerCell.classList.add('cell-head');
+        innerCell.textContent = headerABC[row-1];
       }
-      tbodyTr.appendChild(tr);
+
+      if (row === 0 && col >= 1) {
+        innerCell.textContent = col;
+        innerCell.classList.add('cell-head');
+        innerCell.classList.add('cell-head-number');
+        column.style.width = '40px';
+      }
+
+      if (col != columnInp - 1) {
+        innerCell = document.createElement('div');
+        innerCell.classList.add('cell');
+        column.appendChild(innerCell);
+      }
     }
   }
-
-  function removeTable() {
-    div.innerHTML = '';
-  }
-
-  function resize() {
-    let tr = document.querySelector('tr');
-    tr.addEventListener('click', function(e) {
-      console.log(e);
-      console.log(e.offsetX);
-      console.log(e.offsetY);
-
-      let offsetX = parseInt(e.offsetX);
-      let offsetY = parseInt(e.offsetY);
-
-      if (offsetX > 100) {
-        removeTable();
-        console.log(e.target.style.width);
-        cellInput++;
-        columnInput++;
-        createTable(cellInput, columnInput);
-      } else {
-        createTable();
-      }
-    });
-  }
-
-  // button.addEventListener('click', createTable);
-  createTable();
-  resize();
+  
 }
+
+function createABC() {
+  let arr = [];
+  for (let i = 65; i <= 90; i++) {
+    arr.push(String.fromCodePoint(i));
+  }
+
+  return arr;
+}
+
+createTable(15, 15);

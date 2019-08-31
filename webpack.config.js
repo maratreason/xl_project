@@ -7,7 +7,7 @@ module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     rules: [
@@ -15,15 +15,15 @@ module.exports = {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader']
-        })
+          use: ['css-loader', 'sass-loader'],
+        }),
       },
       {
         test: /\.js$/,
         use: 'babel-loader',
         exclude: [
-          /node_modules/
-        ]
+          /node_modules/,
+        ],
       },
       {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
@@ -32,12 +32,12 @@ module.exports = {
             loader: 'file-loader',
             options: {
               name: '[name].[ext]',
-              outputPath: 'fonts/'
-            }
-          }
-        ]
-      }
-    ]
+              outputPath: 'fonts/',
+            },
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     new HTMLPlugin({
@@ -47,19 +47,19 @@ module.exports = {
     new CopyWebpackPlugin([
       {
         from: './src/fonts',
-        to: './fonts'
+        to: './fonts',
       },
       {
         from: './src/images',
-        to: './images'
+        to: './images',
       },
       {
         from: './src/js',
-        to: './js'
+        to: './js',
       }
     ])
   ],
   devServer: {
-    port: 4200
-  }
-}
+    port: 4200,
+  },
+};

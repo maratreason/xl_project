@@ -50,10 +50,6 @@ module.exports = {
         to: './fonts',
       },
       {
-        from: './src/images',
-        to: './images',
-      },
-      {
         from: './src/js',
         to: './js',
       }

@@ -1,4 +1,4 @@
-const div = document.querySelector('.table');
+const root = document.querySelector('.table');
 
 function createTable(columnsCount, rowsCount) {
 
@@ -13,7 +13,7 @@ function createTable(columnsCount, rowsCount) {
     cell = document.createElement('div');
     cell.classList.add('cell');
     column.appendChild(cell);
-    div.appendChild(column);
+    root.appendChild(column);
 
     for (let col = 0; col < rowsCount; col++) {
       if (col === 0) {

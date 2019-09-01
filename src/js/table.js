@@ -55,7 +55,7 @@ function createHeader(j = 0) {
   let arr = [];
   for (let i = 65; i <= 90; i++) {
     arr.push(String.fromCodePoint(i));
-    if (String.fromCodePoint(i) === "Z") {
+    if (String.fromCodePoint(i).charAt(0) === "Z") {
       j = 1;
       for (let i = 65; i <= 90; i++) {
         arr.push(String.fromCodePoint(i) + ' ' + j);

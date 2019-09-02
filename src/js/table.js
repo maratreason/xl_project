@@ -1,51 +1,69 @@
-const div = document.querySelector('.table');
+const root = document.querySelector('.table');
 
-function createTable(cellInp, columnInp) {
+function createTable(columnsCount, rowsCount) {
 
-  let innerCell;
+  let cell;
   let column;
-  columnInp++;
-  let headerABC = createABC();
+  rowsCount++;
+  let header = createHeader();
 
-  for (let row = 0; row <= cellInp; row++) {
+  for (let row = 0; row <= columnsCount; row++) {
     column = document.createElement('div');
     column.classList.add('column');
-    innerCell = document.createElement('div');
-    innerCell.classList.add('cell');
-    column.appendChild(innerCell);
-    div.appendChild(column);
+    cell = document.createElement('div');
+    cell.classList.add('cell');
+    column.appendChild(cell);
+    root.appendChild(column);
 
-    for (let col = 0; col < columnInp; col++) {
-
+    for (let col = 0; col < rowsCount; col++) {
       if (col === 0) {
-        innerCell.classList.add('cell-head');
-        innerCell.textContent = headerABC[row-1];
+        cell.classList.add('cell-head');
+        cell.innerHTML = `
+          ${header[row - 1]}
+          <div class="resize-col" data-resize="col"></div>
+        `;
       }
 
-      if (row === 0 && col >= 1) {
-        innerCell.textContent = col;
-        innerCell.classList.add('cell-head');
-        innerCell.classList.add('cell-head-number');
+      if (row === 0 && col >= 0) {
+        cell.classList.add('cell-head');
+        cell.classList.add('cell-head-number');
+        cell.classList.remove('row');
+        cell.innerHTML = `
+          ${col}
+          <div class="resize-row" data-resize="row"></div>
+        `;
+        cell.contentEditable = false;
         column.style.width = '40px';
       }
 
-      if (col != columnInp - 1) {
-        innerCell = document.createElement('div');
-        innerCell.classList.add('cell');
-        column.appendChild(innerCell);
+      if (col !== (columnsCount)) {
+        cell = document.createElement('div');
+        cell.classList.add('cell');
+        cell.classList.add('cell-' + row);
+        cell.classList.add('row');
+        cell.classList.add('row-' + col);
+        cell.setAttribute('contenteditable', true);
+        column.appendChild(cell);
       }
     }
   }
-  
+
+  document.querySelectorAll('.cell-head-number')[0].textContent = '';
 }
 
-function createABC() {
+function createHeader(j = 0) {
   let arr = [];
   for (let i = 65; i <= 90; i++) {
     arr.push(String.fromCodePoint(i));
+    if (String.fromCodePoint(i).charAt(0) === "Z") {
+      j = 1;
+      for (let i = 65; i <= 90; i++) {
+        arr.push(String.fromCodePoint(i) + ' ' + j);
+      }
+    }
   }
 
   return arr;
 }
 
-createTable(15, 15);
+createTable(30, 30);

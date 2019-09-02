@@ -32,17 +32,18 @@ function createTable(columnsCount, rowsCount) {
           ${col}
           <div class="resize-row" data-resize="row"></div>
         `;
-        cell.contentEditable = false;
+        cell.setAttribute('contenteditable', 'false');
         column.style.width = '40px';
       }
 
       if (col !== (columnsCount)) {
         cell = document.createElement('div');
+        cell.setAttribute('data-row', col)
         cell.classList.add('cell');
         cell.classList.add('cell-' + row);
         cell.classList.add('row');
         cell.classList.add('row-' + col);
-        cell.setAttribute('contenteditable', true);
+        cell.setAttribute('contenteditable', 'true');
         column.appendChild(cell);
       }
     }

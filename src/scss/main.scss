@@ -23,7 +23,7 @@
       min-width: 30px;
     }
 
-    .cell-head {
+    .cell[data-head] {
       background-color: #e7e7e7;
 
       .resize-col {
@@ -57,34 +57,33 @@
       }
     }
 
+    .cell[contenteditable=true] {
+      text-align: left;
+    }
+
     .cell-head-number {
       font-size: .8rem;
+    }
+
+    .cell[contenteditable=false] {
+      justify-content: center;
     }
 
     .cell {
       position: relative;
       max-width: 100%;
-      min-height: 1.5rem;
+      min-height: 25px;
       max-height: 100%;
       border: 1px solid #999;
       padding: 3px;
       display: flex;
       flex-shrink: 0;
       align-self: center;
-      justify-content: center;
+      justify-content: flex-start;
 
       &:focus {
         border: 1px solid blue;
       }
-    }
-
-    .row {
-      position: relative;
-      min-height: 1.5rem;
-      max-height: 100%;
-      border: 1px solid #999;
-      text-align: center;
-      padding: 3px;
     }
   }
 }

@@ -1,4 +1,9 @@
+
 const root = document.querySelector('.table');
+
+const colState = JSON.parse(localStorage.getItem('colState')) || {};
+const rowState = JSON.parse(localStorage.getItem('rowState')) || {};
+const textState = JSON.parse(localStorage.getItem('saveTextState')) || [];
 
 function createTable(columnsCount, rowsCount) {
 
@@ -17,39 +22,56 @@ function createTable(columnsCount, rowsCount) {
 
     for (let col = 0; col < rowsCount; col++) {
       if (col === 0) {
-        cell.classList.add('cell-head');
+        const letter = header[row-1];
+        cell.setAttribute('data-head', 'cell-head');
+        cell.setAttribute('contenteditable', 'false');
         cell.innerHTML = `
-          ${header[row - 1]}
-          <div class="resize-col" data-resize="col"></div>
+          ${letter}
+          <div class="resize-col" data-resize="col" data-col="${letter}"></div>
         `;
+
+        if (colState[letter]) {
+          column.style.minWidth = colState[letter] + 'px';
+        }
       }
 
       if (row === 0 && col >= 0) {
         cell.classList.add('cell-head');
-        cell.classList.add('cell-head-number');
-        cell.classList.remove('row');
+        cell.setAttribute('data-head', 'cell-head-number');
+        
         cell.innerHTML = `
           ${col}
-          <div class="resize-row" data-resize="row"></div>
+          <div class="resize-row" data-resize="row" data-row="${col}"></div>
         `;
+        
+        cell.style.height = rowState[col] + 'px';
         cell.setAttribute('contenteditable', 'false');
-        column.style.width = '40px';
       }
 
-      if (col !== (columnsCount)) {
+      if (col !== columnsCount) {
         cell = document.createElement('div');
-        cell.setAttribute('data-row', col)
+        cell.setAttribute('data-row', col);
+        cell.setAttribute('data-cell', `cell-${row}`);
+        cell.setAttribute('data-row-count', `row-${col}`);
         cell.classList.add('cell');
-        cell.classList.add('cell-' + row);
-        cell.classList.add('row');
-        cell.classList.add('row-' + col);
         cell.setAttribute('contenteditable', 'true');
-        column.appendChild(cell);
+        cell.style.height = rowState[col + 1] + 'px';
       }
+
+      const letter = header[row-1];
+
+      textState.forEach(e => {
+        if (e.column === letter && (e.cell - 1) === col) {
+          cell.textContent = e.text;
+        }
+      })
+
+      cell.style.height = rowState[col + 1] + 'px';
+      column.appendChild(cell);
     }
   }
-
-  document.querySelectorAll('.cell-head-number')[0].textContent = '';
+  
+  document.querySelectorAll('.cell[data-head=cell-head-number]')[0].textContent = '';
 }
 
 function createHeader(j = 0) {
@@ -67,4 +89,4 @@ function createHeader(j = 0) {
   return arr;
 }
 
-createTable(30, 30);
+createTable(15, 15);

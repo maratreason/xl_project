@@ -1,0 +1,28 @@
+.tools {
+  display: flex;
+  color: #707070;
+  border-top: 1px solid #f0f0f0;
+
+  .tools__block {
+    font-size: .9rem;
+    padding: 0 10px;
+    border-right: 1px solid #f0f0f0;
+
+    .tools__block--items {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      li {
+        padding: 5px 5px 3px;
+        align-items: center;
+      }
+
+      li.tools__block--arrows {
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+    }
+
+  }
+}

@@ -1,0 +1,37 @@
+.header {
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 10px;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  min-height: 50px;
+  font-family: Arial, Helvetica, sans-serif;
+
+  .logo {
+    width: 50px;
+    padding: 3px;
+  }
+
+  .nav {
+    .nav__items {
+      display: flex;
+      font-size: .8rem;
+
+      li {
+        padding: 5px 10px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #f0f0f0;
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+
+}
+
+
